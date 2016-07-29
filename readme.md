@@ -18,10 +18,38 @@ npm install spa-component-flicker
 
 ## Usage ##
 
-Add the singleton to the scope:
+Add the constructor to the scope:
 
 ```js
-var flicker = require('spa-component-flicker');
+var Flicker = require('spa-component-flicker');
+```
+
+Create an instance with config:
+
+```js
+var flicker = new Flicker({
+    className: 'clock',
+    interval: 1000,
+    render: function ( $item, value ) {
+        var time  = new Date(),
+            hours = time.getHours(),
+            mins  = time.getMinutes();
+        
+        $item.innerText = (hours > 9 ? hours : '0' + hours) + ':' + (mins > 9 ? mins : '0' + mins);
+    }
+});
+```
+
+Start flickering:
+
+```js
+flicker.start();
+```
+
+Stop flickering:
+
+```js
+flicker.stop();
 ```
 
 

@@ -1,6 +1,6 @@
 /**
  * @license The MIT License (MIT)
- * @copyright Stanislav Kalashnik <darkpark.main@gmail.com>
+ * @author Yaroslav Surilov <y.surilov@infomir.com>
  */
 
 /* eslint no-path-concat: 0 */
@@ -22,8 +22,7 @@ var Component = require('stb-component');
  * @param {string} [config.value] value to set in flickering container
  */
 function Flicker ( config ) {
-    var self = this,
-        timerId;
+    this.timerId = 0;
 
     // sanitize
     config = config || {};
@@ -43,9 +42,6 @@ function Flicker ( config ) {
         if ( config.render && typeof config.render !== 'function' ) {
             throw new Error(__filename + ': wrong config.render type');
         }
-        if ( config.value && typeof config.value !== 'string' ) {
-            throw new Error(__filename + ': wrong config.value type');
-        }
     }
 
     if ( config.render ) {
@@ -62,6 +58,7 @@ function Flicker ( config ) {
     Object.defineProperty(this, 'interval', {
         set: function ( value ) {
             if ( DEVELOP ) {
+                // interval must be 0 or positive integer
                 if ( !(typeof value === 'number' && isFinite(value) && !(value % 1) && value >= 0) ) {
                     throw new Error(__filename + ': wrong interval value');
                 }
@@ -69,22 +66,6 @@ function Flicker ( config ) {
             this.interval = value;
         }
     });
-
-    this.start = function () {
-        if ( !this.active ) {
-            this.active = true;
-            // starts immediately
-            (function run() {
-                self.render(self.$item, self.value);
-                timerId = setTimeout(run, self.interval);
-            }());
-        }
-    };
-
-    this.stop = function () {
-        this.active = false;
-        clearTimeout(timerId);
-    };
 
     // parent constructor call
     Component.call(this, config);
@@ -94,6 +75,32 @@ function Flicker ( config ) {
 // inheritance
 Flicker.prototype = Object.create(Component.prototype);
 Flicker.prototype.constructor = Flicker;
+
+
+/**
+ * Start flickering.
+ */
+Flicker.prototype.start = function () {
+    var self = this;
+
+    if ( !this.active ) {
+        this.active = true;
+        // starts immediately
+        (function run() {
+            self.render(self.$item, self.value);
+            self.timerId = setTimeout(run, self.interval);
+        }());
+    }
+};
+
+
+/**
+ * Stop flickering.
+ */
+Flicker.prototype.stop = function () {
+    this.active = false;
+    clearTimeout(this.timerId);
+};
 
 
 /**
@@ -113,3 +120,7 @@ Flicker.prototype.defaultRender = function ( $item, value ) {
  * @type {function}
  */
 Flicker.prototype.render = Flicker.prototype.defaultRender;
+
+
+// public
+module.exports = Flicker;
