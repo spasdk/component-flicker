@@ -22,10 +22,12 @@ var Component = require('stb-component');
  * @param {string} [config.value] value to set in flickering container
  */
 function Flicker ( config ) {
-    this.timerId = 0;
+    var interval;
 
     // sanitize
     config = config || {};
+
+    this.timerId = 0;
 
     console.assert(typeof this === 'object', 'must be constructed via new');
 
@@ -48,9 +50,14 @@ function Flicker ( config ) {
         this.render = config.render;
     }
 
-    this.interval = config.interval || 1000;
+    config.focusable = false;
+
+    config.visible = config.visible || true;
 
     this.value = config.value;
+
+    // initial state
+    this.active = false;
 
     // set default className if classList property empty or undefined
     config.className = 'flicker ' + (config.className || '');
@@ -63,12 +70,19 @@ function Flicker ( config ) {
                     throw new Error(__filename + ': wrong interval value');
                 }
             }
-            this.interval = value;
+            interval = value;
+        },
+        get: function () {
+            return interval;
         }
     });
 
+    this.interval = config.interval || 1000;
+
     // parent constructor call
     Component.call(this, config);
+
+    //this.$body.appendChild(document.createElement('div'));
 }
 
 
@@ -87,7 +101,7 @@ Flicker.prototype.start = function () {
         this.active = true;
         // starts immediately
         (function run() {
-            self.render(self.$item, self.value);
+            self.render(self.$node, self.value);
             self.timerId = setTimeout(run, self.interval);
         }());
     }
@@ -98,8 +112,10 @@ Flicker.prototype.start = function () {
  * Stop flickering.
  */
 Flicker.prototype.stop = function () {
-    this.active = false;
-    clearTimeout(this.timerId);
+    if ( this.active ) {
+        this.active = false;
+        clearTimeout(this.timerId);
+    }
 };
 
 
