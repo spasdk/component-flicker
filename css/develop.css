@@ -1,1 +1,8 @@
-/* spa-component-flicker: release */
+.spa-component-flicker {
+    box-sizing: border-box;
+    outline: 1px dashed #005000;
+    outline-offset: -1px; }
+    .spa-component-flicker.hidden {
+        display: none; }
+    .spa-component-flicker.focus {
+        outline: 1px dashed red; }

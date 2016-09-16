@@ -60,7 +60,7 @@ function Flicker ( config ) {
     this.active = false;
 
     // set default className if classList property empty or undefined
-    config.className = 'flicker ' + (config.className || '');
+    //config.className = 'flicker ' + (config.className || '');
 
     Object.defineProperty(this, 'interval', {
         set: function ( value ) {
@@ -89,6 +89,9 @@ function Flicker ( config ) {
 // inheritance
 Flicker.prototype = Object.create(Component.prototype);
 Flicker.prototype.constructor = Flicker;
+
+// set component name
+Flicker.prototype.name = 'spa-component-flicker';
 
 
 /**

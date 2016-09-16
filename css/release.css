@@ -1,1 +1,4 @@
-/* spa-component-flicker: release */
+.spa-component-flicker {
+    box-sizing: border-box; }
+    .spa-component-flicker.hidden {
+        display: none; }
