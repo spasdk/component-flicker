@@ -1,6 +1,7 @@
 Flicker component
 =================
 
+[![Build Status](https://img.shields.io/travis/spasdk/component-flicker.svg?style=flat-square)](https://travis-ci.org/spasdk/component-flicker)
 [![NPM version](https://img.shields.io/npm/v/spa-component-flicker.svg?style=flat-square)](https://www.npmjs.com/package/spa-component-flicker)
 [![Dependencies Status](https://img.shields.io/david/spasdk/component-flicker.svg?style=flat-square)](https://david-dm.org/spasdk/component-flicker)
 [![Gitter](https://img.shields.io/badge/gitter-join%20chat-blue.svg?style=flat-square)](https://gitter.im/DarkPark/spasdk)
@@ -34,7 +35,7 @@ var flicker = new Flicker({
         var time  = new Date(),
             hours = time.getHours(),
             mins  = time.getMinutes();
-        
+
         $item.innerText = (hours > 9 ? hours : '0' + hours) + ':' + (mins > 9 ? mins : '0' + mins);
     }
 });
