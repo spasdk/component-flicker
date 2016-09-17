@@ -17,7 +17,7 @@ var Component = require('stb-component');
  * @extends Component
  *
  * @param {Object} [config={}] init parameters (all inherited from the parent)
- * @param {Function} [config.render] custom render function
+ * @param {function} [config.render] custom render function
  * @param {number} [config.interval=1000] interval for flicking
  * @param {string} [config.value] value to set in flickering container
  */
@@ -38,7 +38,7 @@ function Flicker ( config ) {
         if ( config.className && typeof config.className !== 'string' ) {
             throw new Error(__filename + ': wrong or empty config.className');
         }
-        if ( config.value == null && !config.render ) {
+        if ( !config.value ) {
             throw new Error(__filename + ': nothing to render (absent value)');
         }
         if ( config.render && typeof config.render !== 'function' ) {
@@ -103,10 +103,10 @@ Flicker.prototype.start = function () {
     if ( !this.active ) {
         this.active = true;
         // starts immediately
-        (function run() {
+        (function run () {
             self.render(self.$node, self.value);
             self.timerId = setTimeout(run, self.interval);
-        }());
+        })();
     }
 };
 
