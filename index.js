@@ -39,7 +39,7 @@ function Flicker ( config ) {
             throw new Error(__filename + ': wrong or empty config.className');
         }
         if ( config.value == null && !config.render ) {
-            throw new Error(__filename + ': nothing to render (absent value)');
+            throw new Error(__filename + ': nothing to render (absent value and render method)');
         }
         if ( config.render && typeof config.render !== 'function' ) {
             throw new Error(__filename + ': wrong config.render type');
