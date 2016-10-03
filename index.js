@@ -38,8 +38,8 @@ function Flicker ( config ) {
         if ( config.className && typeof config.className !== 'string' ) {
             throw new Error(__filename + ': wrong or empty config.className');
         }
-        if ( !config.value ) {
-            throw new Error(__filename + ': nothing to render (absent value)');
+        if ( !config.value && !config.render ) {
+            throw new Error(__filename + ': nothing to render (absent value and render method)');
         }
         if ( config.render && typeof config.render !== 'function' ) {
             throw new Error(__filename + ': wrong config.render type');
