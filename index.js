@@ -81,8 +81,6 @@ function Flicker ( config ) {
 
     // parent constructor call
     Component.call(this, config);
-
-    //this.$body.appendChild(document.createElement('div'));
 }
 
 
