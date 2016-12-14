@@ -35,7 +35,7 @@ function Flicker ( config ) {
         if ( typeof config !== 'object' ) {
             throw new Error(__filename + ': wrong config type');
         }
-        if ( config.className && typeof config.className !== 'string' ) {
+        if ( 'className' in config && (!config.className || typeof config.className !== 'string') ) {
             throw new Error(__filename + ': wrong or empty config.className');
         }
         if ( !config.value && !config.render ) {
@@ -70,6 +70,7 @@ function Flicker ( config ) {
                     throw new Error(__filename + ': wrong interval value');
                 }
             }
+
             interval = value;
         },
         get: function () {
