@@ -62,8 +62,8 @@ flicker.stop();
 
 ## Contribution ##
 
-If you have any problem or suggestion please open an issue [here](https://github.com/spasdk/component-flicker/issues).
-Pull requests are welcomed with respect to the [JavaScript Code Style](https://github.com/DarkPark/jscs).
+If you have any problems or suggestions please open an [issue](https://github.com/spasdk/component-flicker/issues)
+according to the contribution [rules](.github/contributing.md).
 
 
 ## License ##
