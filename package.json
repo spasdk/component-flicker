@@ -1,6 +1,6 @@
 {
     "name": "spa-component-flicker",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "description": "Base flicker implementation.",
     "author": {
         "name": "Stanislav Kalashnik",
